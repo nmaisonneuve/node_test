@@ -10,7 +10,7 @@ var app = express();
 app.get('/', function (request, response) {
   client.query('SELECT NOW() AS "theTime"', function(err, result) {
       //console.log(result.rows[0].theTime);
-      response.send("Hello World, time from the postgresql db:" + result.rows[0].theTime );
+      response.send("Hello World -hook, time from the postgresql db:" + result.rows[0].theTime );
       //output: Tue Jan 15 2013 19:12:47 GMT-600 (CST)
   })
 });
