@@ -1,5 +1,4 @@
 var express = require('express');
-//var hookshot = require('hookshot');
 var pg = require('pg');
 var spawn = require('child_process').spawn;
 
@@ -7,25 +6,28 @@ function shspawn(command) {
    spawn('sh', ['-c', command], { stdio: 'inherit' });
 }
 
-cnxString = process.env.DATABASE_URL ||  "tcp://nico:astiko@localhost/gsv_cutter";
-client = new pg.Client(cnxString);
-client.connect();
+
+// cnxString = "tcp://nico:astiko@localhost/walkscore";
+// if NODE_ENV==production {
+//   cnxString =  ""
+// }
+// client = new pg.Client(cnxString);
+// client.connect();
 
 var app = express();
 
 app.get('/', function (request, response) {
-  client.query('SELECT NOW() AS "theTime"', function(err, result) {
-      //console.log(result.rows[0].theTime);
-      response.send("Hello World -hook3, time from the postgresql db:" + result.rows[0].theTime );
- })
+  response.send("Hello World -hook3 "+NODE_ENV+"");
+ //  client.query('SELECT NOW() AS "theTime"', function(err, result) {
+ //      //console.log(result.rows[0].theTime);
+ //      response.send("Hello World -hook3 "+NODE_ENV+" time from the postgresql db:" + result.rows[0].theTime );
+ // })
 });
 
 app.get('/my-github-hook',function(req, res) {
   shspawn("git pull && npm install");
   res.send("");
 });
-
-
 
 
 app.get('/coucou/:name', function(req, res) {
