@@ -16,7 +16,7 @@ var app = express();
 app.get('/', function (request, response) {
   client.query('SELECT NOW() AS "theTime"', function(err, result) {
       //console.log(result.rows[0].theTime);
-      response.send("Hello World -hook2, time from the postgresql db:" + result.rows[0].theTime );
+      response.send("Hello World -hook3, time from the postgresql db:" + result.rows[0].theTime );
  })
 });
 
